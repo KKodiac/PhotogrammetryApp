@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+
 @main
 struct HeadModelMakerApp: App {
+    @StateObject var model: PhotogrammetryViewModel = PhotogrammetryViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: model)
         }
     }
 }
