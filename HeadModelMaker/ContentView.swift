@@ -11,17 +11,25 @@ import RealityKit
 struct ContentView: View {
     private typealias Configuration = PhotogrammetrySession.Configuration
     private typealias Request = PhotogrammetrySession.Request
-    
+
     @ObservedObject var model: PhotogrammetryViewModel
 
     private let requirementsLinkURL: String = "https://developer.apple.com/documentation/RealityKit/PhotogrammetrySession"
     
     var body: some View {
-        if !PhotogrammetrySession.isSupported {
+        if PhotogrammetrySession.isSupported {
             HStack {
                 Spacer()
                 VStack {
-                    TextField("Specify input folder url:", text: $model.inputFolderName)
+                    Button(action: {
+                        let panel = NSOpenPanel()
+                        panel.allowsMultipleSelection = false
+                        panel.canChooseDirectories = true
+                        if panel.runModal() == .OK {
+                            model.inputFolderName = panel.url?.absoluteURL.absoluteString ?? "<none>"
+                        }
+                    }, label: { Text("Specify input folder URL")})
+                    Text("\(model.inputFolderName)")
                     TextField("Specify output file name:", text: $model.outputFileName)
                 }
                 Spacer()
@@ -51,6 +59,9 @@ struct ContentView: View {
                     }.onAppear {
                         model.featureSensitivitySelection = Configuration.FeatureSensitivity.allRawValues.first!
                     }
+                }
+                ToolbarItem {
+                    Button(action: { model.run() }, label: { Text("Run") })
                 }
             }
         } else {
