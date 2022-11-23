@@ -28,20 +28,28 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItemGroup {
-                    Picker("Detail", selection: $model.detailSelection) {
+                    Picker("Details", selection: $model.detailSelection) {
                         ForEach(Request.Detail.allRawValues, id: \.self) { detailValue in
                             Text(detailValue).tag(detailValue)
                         }
+                    }.onAppear {
+                        model.detailSelection = Request.Detail.allRawValues.first!
                     }
-                    Picker("Sample Ordering", selection: $model.sampleOrderingSelection) {
+                    
+                    Picker("Sample Order", selection: $model.sampleOrderingSelection) {
                         ForEach(Configuration.SampleOrdering.allRawValues, id: \.self) { orderValue in
                             Text(orderValue).tag(orderValue)
                         }
+                    }.onAppear {
+                        model.sampleOrderingSelection = Configuration.SampleOrdering.allRawValues.first!
                     }
+                    
                     Picker("Feature Sensitivity", selection: $model.featureSensitivitySelection) {
                         ForEach(Configuration.FeatureSensitivity.allRawValues, id: \.self) { sensitivityValue in
                             Text(sensitivityValue).tag(sensitivityValue)
                         }
+                    }.onAppear {
+                        model.featureSensitivitySelection = Configuration.FeatureSensitivity.allRawValues.first!
                     }
                 }
             }

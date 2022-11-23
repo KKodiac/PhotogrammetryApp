@@ -19,7 +19,7 @@ class PhotogrammetryViewModel: ObservableObject {
     private typealias Request = PhotogrammetrySession.Request
     
     static let shared = PhotogrammetryViewModel()
-
+    
     @Published var inputFolderName: String = ""
     @Published var outputFileName: String = ""
     @Published var isSessionReady: Bool = false
