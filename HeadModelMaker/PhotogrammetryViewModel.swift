@@ -26,17 +26,17 @@ class PhotogrammetryViewModel: ObservableObject {
     @Published var isProcessingFinished: Bool = false
     @Published var requestProgress: Double = 0.0
     
-    @Published var detailSelection: String = "" {
+    @Published var detailSelection: String = Request.Detail.allRawValues.first! {
         didSet {
             self.updatePhotogrammetryDetail(detailSelection)
         }
     }
-    @Published var sampleOrderingSelection: String = "" {
+    @Published var sampleOrderingSelection: String = Configuration.SampleOrdering.allRawValues.first! {
         didSet {
             self.updatePhotogrammetrySampleOrdering(sampleOrderingSelection)
         }
     }
-    @Published var featureSensitivitySelection: String = "" {
+    @Published var featureSensitivitySelection: String = Configuration.FeatureSensitivity.allRawValues.first! {
         didSet {
             self.updatePhotogrammetryFeatureSensitivity(featureSensitivitySelection)
         }

@@ -40,24 +40,18 @@ struct ContentView: View {
                         ForEach(Request.Detail.allRawValues, id: \.self) { detailValue in
                             Text(detailValue).tag(detailValue)
                         }
-                    }.onAppear {
-                        model.detailSelection = Request.Detail.allRawValues.first!
                     }
                     
                     Picker("Sample Order", selection: $model.sampleOrderingSelection) {
                         ForEach(Configuration.SampleOrdering.allRawValues, id: \.self) { orderValue in
                             Text(orderValue).tag(orderValue)
                         }
-                    }.onAppear {
-                        model.sampleOrderingSelection = Configuration.SampleOrdering.allRawValues.first!
                     }
                     
                     Picker("Feature Sensitivity", selection: $model.featureSensitivitySelection) {
                         ForEach(Configuration.FeatureSensitivity.allRawValues, id: \.self) { sensitivityValue in
                             Text(sensitivityValue).tag(sensitivityValue)
                         }
-                    }.onAppear {
-                        model.featureSensitivitySelection = Configuration.FeatureSensitivity.allRawValues.first!
                     }
                 }
                 ToolbarItem {
