@@ -14,6 +14,7 @@
 		0BBEDF5C2921CD7E00B3DBDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BBEDF5B2921CD7E00B3DBDC /* Preview Assets.xcassets */; };
 		0BBEDF642921CF4C00B3DBDC /* PhotogrammetryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBEDF632921CF4C00B3DBDC /* PhotogrammetryViewModel.swift */; };
 		0BC02CED29235D300037F492 /* PhotogrammetryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC02CEC29235D300037F492 /* PhotogrammetryModel.swift */; };
+		A752A6B629346C34002ED225 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A752A6B529346C34002ED225 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		0BBEDF5D2921CD7E00B3DBDC /* HeadModelMaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HeadModelMaker.entitlements; sourceTree = "<group>"; };
 		0BBEDF632921CF4C00B3DBDC /* PhotogrammetryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotogrammetryViewModel.swift; sourceTree = "<group>"; };
 		0BC02CEC29235D300037F492 /* PhotogrammetryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotogrammetryModel.swift; sourceTree = "<group>"; };
+		A752A6B529346C34002ED225 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		0BBEDF532921CD7900B3DBDC /* HeadModelMaker */ = {
 			isa = PBXGroup;
 			children = (
+				A752A6B529346C34002ED225 /* String+Extensions.swift */,
 				0BC02CEC29235D300037F492 /* PhotogrammetryModel.swift */,
 				0B46A814292DBC7800972143 /* FolderViewModel.swift */,
 				0BBEDF632921CF4C00B3DBDC /* PhotogrammetryViewModel.swift */,
@@ -152,6 +155,7 @@
 				0B46A815292DBC7800972143 /* FolderViewModel.swift in Sources */,
 				0BBEDF572921CD7900B3DBDC /* ContentView.swift in Sources */,
 				0BBEDF552921CD7900B3DBDC /* HeadModelMakerApp.swift in Sources */,
+				A752A6B629346C34002ED225 /* String+Extensions.swift in Sources */,
 				0BC02CED29235D300037F492 /* PhotogrammetryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
