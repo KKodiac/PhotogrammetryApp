@@ -55,7 +55,11 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem {
-                    Button(action: { model.run() }, label: { Text("Run") })
+                    NavigationLink(destination: ResultAwaitingView(model: model)) {
+                        Text("Run")
+                    }.simultaneousGesture(TapGesture().onEnded {
+                        model.run()
+                    })
                 }
             }
         } else {

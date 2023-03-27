@@ -25,6 +25,7 @@ class PhotogrammetryViewModel: ObservableObject {
     @Published var isSessionReady: Bool = false
     @Published var isProcessingFinished: Bool = false
     @Published var requestProgress: Double = 0.0
+    @Published var outputFilePath: String = ""
     
     @Published var detailSelection: String = Request.Detail.allRawValues.first! {
         didSet {
@@ -171,7 +172,8 @@ class PhotogrammetryViewModel: ObservableObject {
     }
     
     private func makeRequests() -> PhotogrammetrySession.Request {
-        let outputURL = URL(fileURLWithPath: outputFileName)
+
+        let outputURL = FileManager.default.homeDirectoryForCurrentUser.appending(path: outputFileName)
         if let detailSetting = detail {
             return PhotogrammetrySession.Request.modelFile(url: outputURL, detail: detailSetting)
         } else {
@@ -184,6 +186,7 @@ class PhotogrammetryViewModel: ObservableObject {
         
         switch result {
         case .modelFile(let url):
+            PhotogrammetryViewModel.shared.outputFilePath = url.absoluteString
             logger.log("\tmodelFile available at url=\(url)")
         default:
             logger.warning("\tUnexpected result: \(String(describing: result))")
