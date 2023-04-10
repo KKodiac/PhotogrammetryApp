@@ -21,7 +21,7 @@ class PhotogrammetryViewModel: ObservableObject {
     static let shared = PhotogrammetryViewModel()
     
     @Published var inputFolderName: String = ""
-    @Published var outputFileName: String = ""
+    @Published var outputFileName: String = "output.usdz"
     @Published var isSessionReady: Bool = false
     @Published var isProcessingFinished: Bool = false
     @Published var requestProgress: Double = 0.0
@@ -55,6 +55,7 @@ class PhotogrammetryViewModel: ObservableObject {
         
     func run() {
         self.reset()
+        inputFolderName = inputFolderName.deletePrefix("file://")
         let inputFolderURL = URL(fileURLWithPath: inputFolderName, isDirectory: true)
         let configuration = makeConfigurations()
         logger.log("Using configuration: \(String(describing: configuration))")
@@ -80,7 +81,10 @@ class PhotogrammetryViewModel: ObservableObject {
                     switch output {
                     case .processingComplete:
                         logger.log("Processing is complete!")
-                        self.isProcessingFinished = true
+                        DispatchQueue.main.async{
+                            self.isProcessingFinished = true
+                        }
+                        
                         return
                     case .requestError(let request, let error):
                         logger.error("Request \(String(describing: request)) had an error: \(String(describing: error))")
