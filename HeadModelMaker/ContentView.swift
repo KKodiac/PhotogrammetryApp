@@ -11,7 +11,7 @@ import RealityKit
 struct ContentView: View {
     private typealias Configuration = PhotogrammetrySession.Configuration
     private typealias Request = PhotogrammetrySession.Request
-
+    @State var isPresented: Bool = false
     @ObservedObject var model: PhotogrammetryViewModel
 
     private let requirementsLinkURL: String = "https://developer.apple.com/documentation/RealityKit/PhotogrammetrySession"
@@ -34,6 +34,10 @@ struct ContentView: View {
                 }
                 Spacer()
             }
+            .sheet(isPresented: $isPresented) {
+                ResultAwaitingView(model: model, isPresented: $isPresented)
+                    .frame(width: 500, height: 300)
+            }
             .toolbar {
                 ToolbarItemGroup {
                     Picker("Details", selection: $model.detailSelection) {
@@ -55,11 +59,10 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem {
-                    NavigationLink(destination: ResultAwaitingView(model: model)) {
-                        Text("Run")
-                    }.simultaneousGesture(TapGesture().onEnded {
+                    Button("Run") {
+                        isPresented.toggle()
                         model.run()
-                    })
+                    }
                 }
             }
         } else {

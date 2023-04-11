@@ -25,7 +25,7 @@ class PhotogrammetryViewModel: ObservableObject {
     @Published var isSessionReady: Bool = false
     @Published var isProcessingFinished: Bool = false
     @Published var requestProgress: Double = 0.0
-    @Published var outputFilePath: String = ""
+    @Published var outputFilePath: String = "" 
     
     @Published var detailSelection: String = Request.Detail.allRawValues.first! {
         didSet {
@@ -92,7 +92,6 @@ class PhotogrammetryViewModel: ObservableObject {
                         PhotogrammetryViewModel.handleRequestComplete(request: request, result: result)
                     case .requestProgress(let request, let fractionComplete):
                         PhotogrammetryViewModel.handleRequestProgress(request: request, fractionComplete: fractionComplete)
-                        
                     case .inputComplete:
                         logger.log("Data ingestion is complete. Beginning processing...")
                     case .invalidSample(let id, let reason):
@@ -125,7 +124,7 @@ class PhotogrammetryViewModel: ObservableObject {
                 try session.process(requests: [ request ])
                 // Enter the infinite loop dispatcher used to process asynchronous
                 // blocks on the main queue. You explicitly exit above to stop the loop.
-                RunLoop.main.run()
+                // RunLoop.main.run()
             } catch {
                 logger.critical("Process got error: \(String(describing: error))")
                 Foundation.exit(1)
@@ -176,7 +175,6 @@ class PhotogrammetryViewModel: ObservableObject {
     }
     
     private func makeRequests() -> PhotogrammetrySession.Request {
-
         let outputURL = FileManager.default.homeDirectoryForCurrentUser.appending(path: outputFileName)
         if let detailSetting = detail {
             return PhotogrammetrySession.Request.modelFile(url: outputURL, detail: detailSetting)
@@ -187,11 +185,10 @@ class PhotogrammetryViewModel: ObservableObject {
     
     private static func handleRequestComplete(request: PhotogrammetrySession.Request, result: PhotogrammetrySession.Result) {
         logger.log("Request complete: \(String(describing: request)) with result ... ")
-        
         switch result {
         case .modelFile(let url):
-            PhotogrammetryViewModel.shared.outputFilePath = url.absoluteString
             logger.log("\tmodelFile available at url=\(url)")
+            PhotogrammetryViewModel.shared.outputFilePath = url.absoluteString
         default:
             logger.warning("\tUnexpected result: \(String(describing: result))")
         }
